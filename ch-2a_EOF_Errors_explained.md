@@ -71,7 +71,33 @@ If no input is provided:
 ```text
 EOFError: EOF when reading a line
 ```
+---
+# 3a Understanding EOF Error using StringIO
 
+```text
+📘 What is StringIO?
+- StringIO is a class from Python’s io module.
+- It lets you treat a string like a file object — meaning you can read from and write to it as if it were a file.
+- Useful for testing, mocking file input/output, or temporarily storing text in memory without creating actual files.
+
+```
+```python
+import io
+
+# Create a StringIO object with some text
+stream = io.StringIO("Hello\nWorld")
+
+# Read line by line
+print(stream.readline())  # "Hello\n"
+print(stream.readline())  # "World"
+print(stream.readline())  # "" (empty string, end of file reached)
+```
+> EOF Error Simulation
+```python
+import sys, io
+sys.stdin = io.StringIO("")  # empty stream
+input()  # raises EOFError
+```
 ---
 
 # 4. Understanding EOF (End Of File)
