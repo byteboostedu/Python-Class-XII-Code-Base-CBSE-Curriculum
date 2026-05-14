@@ -681,6 +681,579 @@ Build a mini project using everything learned:
 - Banking System
 
 ---
+# Using `if __name__ == "__main__":` in Python
+
+## Introduction
+
+In Python, the statement:
+
+```python
+if __name__ == "__main__":
+```
+
+is one of the most commonly used patterns in professional Python development.
+
+It helps control whether code should:
+
+* Run directly
+* Be imported safely into another file
+
+This pattern improves:
+
+* Code organization
+* Reusability
+* Testing
+* Maintainability
+
+---
+
+# Understanding `__name__`
+
+Every Python file automatically gets a built-in variable called:
+
+```python
+__name__
+```
+
+Python assigns a value to it depending on how the file is used.
+
+---
+
+## When a Python File Runs Directly
+
+Example:
+
+```bash
+python app.py
+```
+
+Inside `app.py`:
+
+```python
+print(__name__)
+```
+
+Output:
+
+```python
+__main__
+```
+
+---
+
+## When a Python File Is Imported
+
+Example:
+
+```python
+import app
+```
+
+Now inside `app.py`:
+
+```python
+print(__name__)
+```
+
+Output:
+
+```python
+app
+```
+
+The filename becomes the module name.
+
+---
+
+# Basic Syntax
+
+```python
+def main():
+    print("Program started")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# How It Works
+
+Python executes files from top to bottom.
+
+When Python reaches:
+
+```python
+if __name__ == "__main__":
+```
+
+it checks:
+
+> “Am I running this file directly?”
+
+If yes:
+
+```python
+main()
+```
+
+executes.
+
+If no (the file was imported), the block is skipped.
+
+---
+
+# Why This Pattern Is Important
+
+## 1. Prevents Automatic Execution During Import
+
+Without protection:
+
+```python
+print("Application Started")
+```
+
+This runs immediately whenever the file is imported.
+
+That can create unwanted side effects.
+
+---
+
+## 2. Makes Code Reusable
+
+Functions can be imported without executing test or demo code.
+
+---
+
+## 3. Improves Project Structure
+
+Professional Python applications organize execution inside `main()`.
+
+---
+
+# Example Without `if __name__ == "__main__"`
+
+## File: `math_utils.py`
+
+```python
+print("Math module loaded")
+
+
+def add(a, b):
+    return a + b
+```
+
+## File: `test.py`
+
+```python
+import math_utils
+```
+
+## Output
+
+```python
+Math module loaded
+```
+
+Even though we only imported the module.
+
+---
+
+# Example With `if __name__ == "__main__"`
+
+## File: `math_utils.py`
+
+```python
+def add(a, b):
+    return a + b
+
+
+def main():
+    print("Testing add function")
+    print(add(2, 3))
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## File: `test.py`
+
+```python
+import math_utils
+```
+
+## Output
+
+```python
+# No output
+```
+
+The testing code is safely skipped.
+
+---
+
+# Understanding the `main()` Function
+
+The `main()` function is not special in Python.
+
+It is simply a developer convention.
+
+Example:
+
+```python
+def main():
+    print("Main function running")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# Why Use a `main()` Function?
+
+Benefits:
+
+* Cleaner structure
+* Easier debugging
+* Easier testing
+* Better readability
+* Avoids large blocks of global code
+
+---
+
+# Recommended Project Structure
+
+```python
+def load_data():
+    print("Loading data")
+
+
+def process_data():
+    print("Processing data")
+
+
+def save_results():
+    print("Saving results")
+
+
+def main():
+    load_data()
+    process_data()
+    save_results()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# Execution Flow
+
+## Step-by-Step
+
+1. Python reads the file.
+2. Functions are defined.
+3. Python reaches:
+
+```python
+if __name__ == "__main__":
+```
+
+4. Python checks the value of `__name__`.
+5. If true → `main()` runs.
+6. If false → skipped.
+
+---
+
+# Real-World Use Cases
+
+## Scripts
+
+Automation scripts often use:
+
+```python
+if __name__ == "__main__":
+    main()
+```
+
+Examples:
+
+* Data processing
+* File automation
+* Web scraping
+* Command-line tools
+
+---
+
+## Libraries
+
+Libraries should not execute test code when imported.
+
+---
+
+## Unit Testing
+
+```python
+def run_tests():
+    print("Running tests")
+
+
+if __name__ == "__main__":
+    run_tests()
+```
+
+---
+
+# Common Beginner Mistakes
+
+## Mistake 1 — Forgetting Double Underscores
+
+Wrong:
+
+```python
+if name == "main":
+```
+
+Correct:
+
+```python
+if __name__ == "__main__":
+```
+
+---
+
+## Mistake 2 — Misspelling `"__main__"`
+
+Wrong:
+
+```python
+if __name__ == "__main":
+```
+
+Correct:
+
+```python
+if __name__ == "__main__":
+```
+
+---
+
+## Mistake 3 — Calling `main()` Outside the Condition
+
+Wrong:
+
+```python
+main()
+
+if __name__ == "__main__":
+```
+
+Correct:
+
+```python
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# Intermediate Example
+
+```python
+def greet(name):
+    return f"Hello, {name}"
+
+
+def main():
+    user = input("Enter your name: ")
+    print(greet(user))
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# Advanced Example — Reusable Module
+
+## calculator.py
+
+```python
+def add(a, b):
+    return a + b
+
+
+def subtract(a, b):
+    return a - b
+
+
+def main():
+    print("Calculator Test")
+    print(add(10, 5))
+    print(subtract(10, 5))
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## another_file.py
+
+```python
+import calculator
+
+print(calculator.add(2, 3))
+```
+
+## Output
+
+```python
+5
+```
+
+Notice that the test code inside `calculator.py` does not execute.
+
+---
+
+# Best Practices
+
+## Always Use Functions
+
+Good:
+
+```python
+def main():
+    pass
+```
+
+Bad:
+
+```python
+print("Start")
+print("Processing")
+print("End")
+```
+
+---
+
+## Keep `main()` Small
+
+Good:
+
+```python
+def main():
+    load()
+    process()
+    save()
+```
+
+The `main()` function should coordinate tasks, not contain all logic.
+
+---
+
+# Interview Question
+
+## Question
+
+Why do we use:
+
+```python
+if __name__ == "__main__":
+```
+
+## Answer
+
+It ensures that specific code runs only when the Python file is executed directly, and not when the file is imported as a module.
+
+---
+
+# Practice Exercises
+
+## Exercise 1
+
+Create a Python file that:
+
+* Defines a function `square(x)`
+* Uses `main()` to test the function
+* Uses `if __name__ == "__main__"`
+
+---
+
+## Exercise 2
+
+Create:
+
+* `calculator.py`
+* `test.py`
+
+Import functions from `calculator.py` into `test.py`.
+
+---
+
+## Exercise 3
+
+Build a program that:
+
+* Takes user input
+* Checks whether a number is even or odd
+* Uses a `main()` function
+
+---
+
+# Summary
+
+| Concept          | Meaning                          |
+| ---------------- | -------------------------------- |
+| `__name__`       | Built-in Python variable         |
+| `"__main__"`     | Value when file runs directly    |
+| `main()`         | Developer-defined entry function |
+| Import-safe code | Prevents unwanted execution      |
+
+---
+
+# Final Template
+
+```python
+def main():
+    print("Application started")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# Recommended Learning Path
+
+Next topics to learn:
+
+1. Python modules
+2. Python imports
+3. Python packages
+4. Virtual environments
+5. Command-line applications
+6. Unit testing
+7. Object-oriented programming
+
+---
+
+# Quick Revision
+
+```python
+if __name__ == "__main__":
+    main()
+```
+
+Means:
+
+> “Run this code only if this file is executed directly.”
 
 # Final Tip
 
