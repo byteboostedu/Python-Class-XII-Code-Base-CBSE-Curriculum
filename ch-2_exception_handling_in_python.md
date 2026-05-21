@@ -1055,3 +1055,327 @@ You learned:
 > Great developers write code that survives failure.”
 
 Master exception handling to build robust, scalable, and production-ready Python applications.
+
+# Exception Handling Using Tea and Milk Analogy
+
+## Introduction
+
+Exception handling is a mechanism used in programming to handle unexpected errors during program execution.
+
+Instead of crashing the program, exception handling allows the program to respond gracefully and continue execution when possible.
+
+In Python, exception handling is mainly done using:
+
+```python
+try
+except
+```
+
+---
+
+# Real-Life Analogy — Making Tea
+
+Imagine you are preparing tea.
+
+Normally, tea preparation requires:
+
+- Water
+- Tea powder
+- Sugar
+- Milk
+
+But suddenly:
+
+> Milk is not available.
+
+This unexpected situation behaves like an **exception** in programming.
+
+---
+
+# Real-Life Flow of Exception Handling
+
+## Step 1 — Error Occurs
+
+You open the fridge and discover:
+
+```text
+Milk not found
+```
+
+This is the unexpected problem.
+
+---
+
+## Step 2 — Exception Object is Created
+
+Your brain identifies the problem:
+
+```text
+"No Milk Found"
+```
+
+This acts like an exception object.
+
+---
+
+## Step 3 — Exception is Raised
+
+You announce the problem:
+
+```text
+"Mom! There is no milk!"
+```
+
+This is similar to:
+
+```python
+raise Exception()
+```
+
+---
+
+## Step 4 — Exception is Handled
+
+Your mom responds:
+
+```text
+"Make black tea instead."
+```
+
+This is called:
+
+# Catching the Exception
+
+The problem is handled and tea preparation continues.
+
+---
+
+# What Happens if Nobody Handles It?
+
+If nobody responds to the problem:
+
+```text
+Tea preparation stops.
+```
+
+This is similar to:
+
+# Program Termination
+
+---
+
+# Python Program — Tea and Milk Exception Example
+
+```python
+print("Tea Preparation Started ☕")
+
+try:
+
+    milk = input("Is milk available? (yes/no): ")
+
+    if milk.lower() != "yes":
+        raise Exception("No Milk Found!")
+
+    print("Adding milk to tea...")
+    print("Tea is ready ☕")
+
+except Exception as e:
+
+    print("Exception Caught!")
+    print("Problem:", e)
+    print("Making black tea instead ☕")
+
+print("Tea Preparation Finished")
+```
+
+---
+
+# Sample Output 1 — Milk Available
+
+```text
+Tea Preparation Started ☕
+
+Is milk available? (yes/no): yes
+
+Adding milk to tea...
+Tea is ready ☕
+
+Tea Preparation Finished
+```
+
+---
+
+# Sample Output 2 — Milk Not Available
+
+```text
+Tea Preparation Started ☕
+
+Is milk available? (yes/no): no
+
+Exception Caught!
+Problem: No Milk Found!
+
+Making black tea instead ☕
+
+Tea Preparation Finished
+```
+
+---
+
+# Flowchart Mapping
+
+The following table maps the tea example to the exception handling flowchart.
+
+| Flowchart Step | Tea Analogy | Python Code |
+|---|---|---|
+| Error encountered in method | Milk not available | `milk.lower() != "yes"` |
+| Create exception object | "No Milk Found" | `Exception("No Milk Found!")` |
+| Exception is raised | Shouting for help | `raise Exception(...)` |
+| Runtime searches handler | Looking for someone to help | Python checks `except` block |
+| Handler found | Mom suggests black tea | `except Exception as e` |
+| Executes handling code | Making black tea | `print("Making black tea instead")` |
+| Program continues | Tea preparation finishes | Final print statement |
+
+---
+
+# Understanding Important Keywords
+
+## 1. try
+
+The `try` block contains risky code that may produce an error.
+
+```python
+try:
+    risky_code()
+```
+
+---
+
+## 2. raise
+
+The `raise` keyword manually generates an exception.
+
+```python
+raise Exception("No Milk Found!")
+```
+
+Meaning:
+
+> "Something went wrong!"
+
+---
+
+## 3. except
+
+The `except` block catches and handles the exception.
+
+```python
+except Exception as e:
+    print(e)
+```
+
+---
+
+# Simple Explanation of Program Flow
+
+## Without Exception Handling
+
+```text
+Problem occurs → Program crashes
+```
+
+---
+
+## With Exception Handling
+
+```text
+Problem occurs → Exception caught → Program continues
+```
+
+---
+
+# Visual Understanding
+
+## Normal Tea Preparation
+
+```text
+Start
+  ↓
+Milk Available
+  ↓
+Tea Prepared
+  ↓
+End
+```
+
+---
+
+## Tea Preparation with Exception
+
+```text
+Start
+  ↓
+Milk Not Available
+  ↓
+Exception Raised
+  ↓
+Exception Caught
+  ↓
+Black Tea Prepared
+  ↓
+End
+```
+
+---
+
+# Key Concepts Learned
+
+| Concept | Meaning |
+|---|---|
+| Exception | Unexpected problem |
+| Raise | Throwing the problem |
+| Catch | Handling the problem |
+| Handler | Code that responds to error |
+| Program Termination | Program stops unexpectedly |
+
+---
+
+# Advantages of Exception Handling
+
+- Prevents program crashes
+- Makes programs user-friendly
+- Helps recover from errors
+- Improves debugging
+- Allows smooth program execution
+
+---
+
+# One-Line Memory Trick
+
+> TRY the risky code, EXCEPT the possible errors.
+
+```python
+try:
+    risky_code()
+
+except ErrorType:
+    handle_error()
+```
+
+---
+
+# Conclusion
+
+The tea and milk analogy demonstrates how exception handling works in real life.
+
+When a problem occurs:
+
+1. The error is detected
+2. An exception is created
+3. The exception is raised
+4. A handler catches the exception
+5. The program continues safely
+
+This is exactly how exception handling works in Python and many other programming languages.
+
+---
